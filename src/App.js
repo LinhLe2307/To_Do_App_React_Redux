@@ -1,9 +1,8 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import React, { useEffect, useState } from 'react';
-import Calendar from 'react-calendar';
+import React from 'react';
 import Layout from "./pages/Layout";
 import HomePage from "./components/HomePage";
-import NewTask from "./components/NewTask";
+import AddTodo from "./components/AddTodo";
 
 function App() {
 
@@ -12,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<HomePage />}/>
-          <Route path="new-task" element={<NewTask />}/>
+          <Route path="add-todo" element={<AddTodo />}/>
         </Route>
       </Routes>
     </BrowserRouter>
