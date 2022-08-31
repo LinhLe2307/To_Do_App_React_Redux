@@ -2,15 +2,18 @@ import React from 'react'
 import Button from '@mui/material/Button';
 import { TextareaAutosize, TextField } from '@mui/material';
 
-const SingleCard = ({date}) => {
+const SingleCard = ({date, handleChange, inputForm}) => {
+  const {taskName, description} = inputForm;
   return (
-    <form>
+    <form onChange={handleChange}>
       <label>New Task</label>
       <TextField
           id="outlined-textarea"
           label="Multiline Placeholder"
           placeholder="Placeholder"
           multiline
+          defaultValue={taskName}
+          name="taskName"
         />
       <label>Notes</label>
       <TextareaAutosize
@@ -18,9 +21,11 @@ const SingleCard = ({date}) => {
         minRows={5}
         placeholder="Minimum 3 rows"
         style={{ width: 200 }}
+        defaultValue={description}
+        name="description"
       />
       <p>{date.toString()}</p>
-      <Button variant="contained">Add Task</Button>
+      <Button type="submit" variant="contained">Add Task</Button>
     </form>
   )
 }
