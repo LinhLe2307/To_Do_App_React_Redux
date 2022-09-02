@@ -20,7 +20,6 @@ const HomePage = () => {
 
   return (
     <div>
-      HomePage
       <Link to="add-todo">Add new todo</Link>
       {todos && todos.map(todo => <SingleCard todo={todo} key={todo.id} handleRemove={handleRemove} handleEdit={handleEdit}/>)}
     </div>
