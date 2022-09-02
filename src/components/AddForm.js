@@ -25,7 +25,7 @@ const AddForm = ({date, handleChange, handleSubmit, inputForm}) => {
         defaultValue={description}
         name="description"
       />
-      <p>{date.toString()}</p>
+      <p>{date.format('DD/MM/YYYY')}</p>
       <Button type="submit" variant="contained">Add Task</Button>
     </form>
   )
