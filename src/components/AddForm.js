@@ -4,6 +4,7 @@ import { TextareaAutosize, TextField } from '@mui/material';
 
 const AddForm = ({date, handleChange, handleSubmit, inputForm}) => {
   const {taskName, description} = inputForm;
+  
   return (
     <form onChange={handleChange} onSubmit={handleSubmit}>
       <label>New Task</label>

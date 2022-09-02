@@ -11,7 +11,14 @@ export const todoSlice = createSlice({
             }
             state.push(newTodo)
         },
-
+        editTodo: (state, action) => {
+            const newTodo = action.payload;
+            const todoIndex = state.findIndex(todo => todo.id === newTodo.id)
+            if (todoIndex >= 0) {
+                // state = state.splice(todoIndex, 1, action.payload)
+                state[todoIndex] = newTodo
+            }
+        },
         removeTodo: (state, action) => {
             const removeTodoId = action.payload;
             state = state.filter(todo => removeTodoId !== todo.id) // we clone a new array
@@ -20,5 +27,5 @@ export const todoSlice = createSlice({
     }
 })
 
-export const {addTodo, removeTodo} = todoSlice.actions
+export const {addTodo, editTodo, removeTodo} = todoSlice.actions
 export default todoSlice.reducer
