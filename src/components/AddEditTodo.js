@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+// import Calendar from "react-calendar";
 import dayjs from "dayjs";
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -9,16 +10,14 @@ import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker";
 import AddForm from "./AddForm";
 import { addTodo, editTodo } from "../features/todo/todoSlice";
 
-const isWeekend = (date) => {
-  const day = date.day();
+// const isWeekend = (date) => {
+//   const day = date.day();
 
-  return day === 0 || day === 6;
-};
+//   return day === 0 || day === 6;
+// };
 
 const AddEditTodo = () => {
-  const [date, setDate] = useState(dayjs());
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [date, setDate] = useState(new Date());
   const { todoId } = useParams();
   const editedTodo = useSelector((state) => {
     // sine the todoId is a string and the id is number
@@ -28,11 +27,13 @@ const AddEditTodo = () => {
     ? {
         taskName: "",
         description: "",
-        date: date.format('DD/MM/YYYY'),
+        date: date.toString(),
       }
     : editedTodo;
 
   const [inputForm, setInputForm] = useState(initialValues);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     e.preventDefault();
@@ -55,17 +56,22 @@ const AddEditTodo = () => {
     });
   };
 
+  useEffect(() => {
+    console.log(date);
+  }, [date]);
   return (
     <div>
       <div>NewTask</div>
+      {/* <Calendar onChange={setDate} value={date} /> */}
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <StaticDatePicker
           orientation="landscape"
           openTo="day"
-          value={date}
+          value={date.toString()}
           // shouldDisableDate={isWeekend}
           onChange={(newValue) => {
-            setDate(newValue);
+            console.log(newValue.$d);
+            setDate(newValue.$d);
           }}
           renderInput={(params) => <TextField {...params} />}
         />
