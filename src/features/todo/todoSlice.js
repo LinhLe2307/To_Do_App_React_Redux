@@ -24,9 +24,14 @@ export const todoSlice = createSlice({
             const removeTodoId = action.payload;
             state = state.filter(todo => removeTodoId !== todo.id) // we clone a new array
             return state // have to return the new array
+        },
+        searchTodo: (state, action) => {
+            const todoTask = action.payload;
+            state = state.filter(todo => todo.taskName.indexOf(todoTask) !== -1);
+            return state
         }
     }
 })
 
-export const {addTodo, editTodo, removeTodo} = todoSlice.actions
+export const {addTodo, editTodo, removeTodo, searchTodo} = todoSlice.actions
 export default todoSlice.reducer

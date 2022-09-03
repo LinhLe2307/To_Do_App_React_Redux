@@ -20,7 +20,7 @@ const SingleCard = ({todo, handleRemove, handleEdit}) => {
   const {id, taskName, description, date} = todo;
   return (
     <div>
-      <Card sx={{ maxWidth: 500 }}>
+      <Card sx={{ minWidth: 400 }}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
           {dayjs().format('YYYY/MM/DD HH:mm:ss')}

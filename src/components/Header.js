@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -9,6 +9,8 @@ import InputBase from '@mui/material/InputBase';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import {searchTodo} from "../features/todo/todoSlice";
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -54,6 +56,14 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 const Header = () => {
+  const [inputSearch, setInputSearch] = useState();
+  const selector = useSelector(state => state.todos);
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    const action = e.target.value
+    setInputSearch(action)
+    dispatch(searchTodo(action))
+  }
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -82,6 +92,9 @@ const Header = () => {
             <StyledInputBase
               placeholder="Search…"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={handleChange}
+              defaultValue={inputSearch}
+              on="true"
             />
           </Search>
         </Toolbar>

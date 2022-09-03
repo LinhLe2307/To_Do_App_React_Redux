@@ -5,7 +5,7 @@ import MainPage from '../components/MainPage'
 const Layout = () => {
   return (
     <div>
-        <Header />
+        <Header/>
         <MainPage />
     </div>
     )
