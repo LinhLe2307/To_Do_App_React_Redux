@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 // import Calendar from "react-calendar";
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 import TextField from "@mui/material/TextField";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -12,25 +12,24 @@ import { addTodo, editTodo } from "../features/todo/todoSlice";
 
 // const isWeekend = (date) => {
 //   const day = date.day();
-
 //   return day === 0 || day === 6;
 // };
 
 const AddEditTodo = () => {
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(dayjs());
   const { todoId } = useParams();
   const editedTodo = useSelector((state) => {
     // sine the todoId is a string and the id is number
     return state.todos.find((x) => x.id === +todoId);
   });
   const initialValues = !todoId
-    ? {
-        taskName: "",
-        description: "",
-        date: date.toString(),
-      }
-    : editedTodo;
-
+  ? {
+    taskName: "",
+    description: "",
+    date: date.format('YYYY/MM/DD'),
+  }
+  : editedTodo;
+  
   const [inputForm, setInputForm] = useState(initialValues);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -51,27 +50,22 @@ const AddEditTodo = () => {
           const action = addTodo(inputForm);
           dispatch(action);
         }
-        navigate("/");
+        navigate("/", {replace: 'true'});
       }, 2000);
     });
   };
 
-  useEffect(() => {
-    console.log(date);
-  }, [date]);
   return (
-    <div>
-      <div>NewTask</div>
+    <div >
       {/* <Calendar onChange={setDate} value={date} /> */}
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <StaticDatePicker
           orientation="landscape"
           openTo="day"
-          value={date.toString()}
+          value={date.format('YYYY/MM/DD')}
           // shouldDisableDate={isWeekend}
           onChange={(newValue) => {
-            console.log(newValue.$d);
-            setDate(newValue.$d);
+            setDate(newValue);
           }}
           renderInput={(params) => <TextField {...params} />}
         />

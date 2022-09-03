@@ -17,6 +17,7 @@ export const todoSlice = createSlice({
             if (todoIndex >= 0) {
                 // state = state.splice(todoIndex, 1, action.payload)
                 state[todoIndex] = newTodo
+                
             }
         },
         removeTodo: (state, action) => {
