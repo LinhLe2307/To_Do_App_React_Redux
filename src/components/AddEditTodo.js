@@ -20,7 +20,7 @@ const AddEditTodo = () => {
   const { todoId } = useParams();
   const editedTodo = useSelector((state) => {
     // sine the todoId is a string and the id is number
-    return state.todos.find((x) => x.id === +todoId);
+    return state.todos.todos.find((x) => x.id === +todoId);
   });
   const initialValues = !todoId
   ? {
