@@ -1,3 +1,5 @@
+[![CI/CD](https://github.com/LinhLe2307/To_Do_App_React_Redux/actions/workflows/main.yml/badge.svg)](https://github.com/LinhLe2307/To_Do_App_React_Redux/actions/workflows/main.yml)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
